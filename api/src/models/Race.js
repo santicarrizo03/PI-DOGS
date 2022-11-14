@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-moodule.exports = (sequelize) =>{
+module.exports = (sequelize) =>{
   sequelize.define("Race",{
     id: {
       type: DataTypes.UUID,
@@ -14,11 +14,11 @@ moodule.exports = (sequelize) =>{
       unique: true,
     },
     height: {
-      type: Datatypes.FLOAT,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     weight: {
-      type: Datatypes.FLOAT,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     lifeYears: {
@@ -26,6 +26,6 @@ moodule.exports = (sequelize) =>{
     }
   },
   {
-    timestamps: false
+    timestamps: false,
   })
 }
