@@ -21,21 +21,21 @@ function SearchBar({ paged }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="search"
-          placeholder="Search a race.."
-          value={race}
-          onChange={handleInput}
-        />
-        <button className="searchSubmit" type="submit">
-          SEARCH
-        </button>
-      </form>
+      <input
+        type="text"
+        className="search"
+        placeholder="Search a race.."
+        onChange={handleInput}
+      />
+      <button
+        className="searchSubmit"
+        type="submit"
+        onClick={(e) => handleSubmit(e)}
+      >
+        SEARCH
+      </button>
     </div>
   );
 }
 
 export default SearchBar;
-

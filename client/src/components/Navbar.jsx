@@ -42,8 +42,8 @@ function Navbar({ paged }) {
         </option>
         <option value="asc">A-Z</option>
         <option value="desc">Z-A</option>
-        <option value="weightA">Weight +</option>
-        <option value="weightD">Weight -</option>
+        <option value="weightA">Menor a Mayor Peso</option>
+        <option value="weightD">Mayor a Menor Peso</option>
       </select>
       <select className="filters" onChange={handleChangeFilter}>
         <option selected="disabled" disabled={true}>
