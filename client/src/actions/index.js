@@ -36,27 +36,23 @@ export const getRaceById = (id) => (dispatch) => {
     });
 };
 
-export const createRace = (race) => (dispatch) => {
-  axios
-    .post("/dogs", race)
-    .then((r) => {
-      return dispatch({ type: "CREATE_RACE", payload: r.data });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+export function createRace(payload) {
+  return async function (dispatch) {
+      const response = await axios.post('http://localhost:3001/dogs', payload);
+      console.log(response);
+      return response;
+  }
+}
 
-export const getTemperaments = () => (dispatch) => {
-  axios
-    .get("/temperaments")
-    .then((r) => {
-      return dispatch({ type: "GET_TEMPERAMENTS", payload: r.data });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+export function getTemperaments() {
+  return async function (dispatch) {
+      let json = await axios.get('http://localhost:3001/temperament', {});
+      return dispatch({
+          type: "GET_TEMPERAMENTS",
+          payload: json.data,
+      })
+  }
+}
 
 export const filterByTemperament = (temperament) => (dispatch) => {
   return dispatch({ type: "FILTER_BY_TEMPERAMENT", payload: temperament });
