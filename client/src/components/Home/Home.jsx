@@ -9,6 +9,7 @@ import {
 } from "../../actions/index";
 import Card from "../Card/Card";
 import Navbar from "../NavBar/Navbar";
+import "./Home.css"
 
 export default function Home() {
   const dispatch = useDispatch();

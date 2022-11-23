@@ -1,0 +1,13 @@
+.card{
+  width: 30%;
+  border: 1px solid black;
+  margin: 15px;
+  border-radius: 30px;
+  transition-duration: 0.5s;
+  font-family: 'Courier New', Courier, monospace;
+}
+.card img {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}

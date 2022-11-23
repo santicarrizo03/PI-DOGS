@@ -1,0 +1,32 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.navbar{
+  width: 80%;
+  margin: auto;
+  padding:35px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filters {
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid rgb(128, 87, 0);
+  width: 15%;
+  text-align: center;
+  margin: 10px;
+  transition-duration: 0.5s;
+  font-family: 'Courier New', Courier, monospace;
+}
+.create{
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid rgb(128, 87, 0);
+  width: auto;
+  text-align: center;
+  margin: 10px;
+  transition-duration: 0.5s;
+  font-family: 'Courier New', Courier, monospace;
+}

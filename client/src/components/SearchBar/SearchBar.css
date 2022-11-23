@@ -1,0 +1,14 @@
+.search {
+  background-color: white;
+  margin: 10px 0px 10px 10px;
+  transition-duration: 0.5s;
+  font-family: 'Courier New', Courier, monospace;
+}
+.searchSubmit {
+  cursor: pointer;
+  background-color: white;
+  text-align: center;
+  transition-duration: 0.5s;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 2px;
+}

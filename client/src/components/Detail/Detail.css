@@ -1,0 +1,11 @@
+.detail{
+  background-color: antiquewhite;
+}
+.title {
+  font-family: cursive;
+}
+
+.info {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.2em;
+}

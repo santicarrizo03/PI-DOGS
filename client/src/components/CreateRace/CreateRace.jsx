@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { postRace, getRaces, getTemperaments } from "../../actions";
+import "./CreateRace.css"
 
 const validateForm = (form) => {
   var errors = {};

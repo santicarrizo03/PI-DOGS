@@ -1,0 +1,22 @@
+.home{
+  background-color: rgb(247, 206, 152);
+  background-size: auto;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  background-repeat:repeat;
+  
+}
+.cards{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.prev-next {
+  cursor: pointer;
+  background-color: white;
+  width: 5%;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}

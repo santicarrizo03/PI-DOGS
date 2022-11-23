@@ -8,6 +8,7 @@ import {
   resetRaces,
 } from "../../actions/index";
 import SearchBar from "../SearchBar/SearchBar";
+import "./NavBar.css"
 
 function Navbar({ paged }) {
   const dispatch = useDispatch();
@@ -69,10 +70,11 @@ function Navbar({ paged }) {
           <option value="disabled">Loading</option>
         )}
       </select>
-      <Link to="/dog">
-        <button className="filters">Create a Race</button>
-      </Link>
       <SearchBar paged={paged} />
+      <Link to="/dog">
+        <button className="create">Create a Race</button>
+      </Link>
+      
     </div>
   );
 }

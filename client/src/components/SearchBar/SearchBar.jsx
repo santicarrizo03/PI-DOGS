@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getRaceByName, resetRaces } from "../../actions/index";
+import "./SearchBar.css"
 
 function SearchBar({ paged }) {
   const dispatch = useDispatch();
