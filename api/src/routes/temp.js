@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const axios = require("axios");
-const { Op, Temper } = require("sequelize");
+const { Op, Temper } = require("../db");
 
 router.get("/", async (req, res) => {
   const apiData = await axios.get(
@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
       temperaments = temperaments.concat(arrayTemps);
     }
   });
-  let filteredTemperaments = temperements.filter((temp, i) => {
-    return temperaments.indexOf(temp) === i;
+  let filteredTemperaments = temperaments.filter((temp, index) => {
+    return temperaments.indexOf(temp) === index;
   });
   filteredTemperaments.forEach(async (temp) => {
     const existTemp = await Temper.findOne({ where: { name: temp } });

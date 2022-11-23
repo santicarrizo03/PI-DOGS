@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import {getRaceById, resetDetail} from "../actions/index"
+import {getRaceById, resetDetail} from "../../actions/index"
+import "./Detail.css"
 
 
 function Detail() {

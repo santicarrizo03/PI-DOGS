@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   const { name } = req.query;
 
   const totalApiData = await axios.get(
-    "https://api.thedogapi.com/v1/breeds?api_key=live_k34fbe5LFpnZgMN8c9W3GrXoMUDeG42qfyBARMBbUDJAc2pU4cl4SEQAKvT0PrIq"
+    "https://api.thedogapi.com/v1/breeds?api_key=29117eac-fbd3-4f74-9260-69b8c2959c19"
   );
 
   if (!name) {
@@ -15,7 +15,9 @@ router.get("/", async (req, res) => {
       return {
         id: dog.id,
         name: dog.name,
-        image: dog.image.url,
+        image: dog.image
+          ? dog.image.url
+          : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png",
         temperament: dog.temperament,
         weight: dog.weight,
       };
@@ -47,9 +49,8 @@ router.get("/", async (req, res) => {
   }
 
   const dogApiData = await axios.get(
-    `https://api.thedogapi.com/v1/breeds/search?q=${name}api_key=live_k34fbe5LFpnZgMN8c9W3GrXoMUDeG42qfyBARMBbUDJAc2pU4cl4SEQAKvT0PrIq`
+    `https://api.thedogapi.com/v1/breeds/search?q=${name}&api_key=29117eac-fbd3-4f74-9260-69b8c2959c19`
   );
-
   const dogDbData = await Race.findAll({
     where: { name: { [Op.iLike]: name } },
     include: {
@@ -76,7 +77,7 @@ router.get("/", async (req, res) => {
 
   if (dbRealData.length > 0) {
     const totalData = dogApiData.data.concat(dbRealData);
-    const neededData = totalData.mao((dog) => {
+    const neededData = totalData.map((dog) => {
       const dogImage = totalApiData.data.find((doggie) => {
         return doggie.id === dog.id;
       });
@@ -93,15 +94,18 @@ router.get("/", async (req, res) => {
         return {
           id: dog.id,
           name: dog.name,
-          image: falwse,
+          image: false,
           temperament: dog.temperament,
           weight: dog.weight,
         };
       }
     });
-
     if (neededData.length === 0) {
-      return res.status(404).json("Dog not found");
+      return res.status(404).json("No se encontró el perro");
+    } else return res.json(totalData);
+  } else {
+    if (dogApiData.data.length === 0) {
+      return res.status(404).json("No se encontró el perro");
     } else {
       const neededData = dogApiData.data.map((dog) => {
         const dogImage = totalApiData.data.find((doggie) => {
@@ -135,7 +139,7 @@ router.get("/:idRaza", async (req, res) => {
   const id = Number(idRaza);
   if (!isNaN(id)) {
     const apiData = await axios.get(
-      "https://api.thedogapi.com/v1/breeds?api_key=live_k34fbe5LFpnZgMN8c9W3GrXoMUDeG42qfyBARMBbUDJAc2pU4cl4SEQAKvT0PrIq"
+      "https://api.thedogapi.com/v1/breeds?api_key=29117eac-fbd3-4f74-9260-69b8c2959c19"
     );
     const race = apiData.data.find((r) => {
       return r.id === id;
@@ -145,14 +149,13 @@ router.get("/:idRaza", async (req, res) => {
         name: race.name,
         image: race.image.url,
         temperament: race.temperament,
-        weight: race.weight.metric,
         height: race.height.metric,
+        weight: race.weight.metric,
         lifeYears: race.life_span,
       };
       return res.json(raceDetailData);
     }
   }
-
   const dbRace = await Race.findByPk(idRaza);
   const dbTemperament = await Race_Temper.findAll({
     where: { RaceId: idRaza },
@@ -161,17 +164,25 @@ router.get("/:idRaza", async (req, res) => {
   dbTemperament.forEach((temp, i) => {
     const tempId = temp.dataValues.TemperId;
     Temper.findByPk(tempId).then((temper) => {
-      raceTemperament.push(temper.dataValues.name);
+      raceTemperaments.push(temper.dataValues.name);
       if (i === dbTemperament.length - 1) {
         return res.json({
           name: dbRace.dataValues.name,
           height: dbRace.dataValues.height,
           weight: dbRace.dataValues.weight,
           lifeYears: dbRace.dataValues.lifeYears,
-          temperament: temperaments,
+          temperament: raceTemperaments,
         });
       }
     });
+    // const tempData = await Temper.findByPk(tempId);
+    // const tempName = tempData.dataValues.name;
+    // if (i === dbTemperament.length - 1) {
+    //   raceTemperaments = raceTemperaments + `${tempName}`;
+    // } else {
+    //   raceTemperaments = raceTemperaments + `${tempName}, `;
+    // }
+    // console.log(raceTemperaments);
   });
 });
 
@@ -179,7 +190,7 @@ router.post("/", async (req, res) => {
   const { name, temperaments, weight, height, lifeYears } = req.body;
 
   if (!name || !weight || !height) {
-    return res.status(404).send("insufficient data");
+    return res.status(404).send("Faltan datos");
   }
 
   const newRace = await Race.create({
@@ -198,7 +209,7 @@ router.post("/", async (req, res) => {
     });
   }
 
-  return res.send({ msg: "successfully created" });
+  return res.send({ msg: "La raza ha sido creada con éxito", data: newRace });
 });
 
 module.exports = router;

@@ -23,7 +23,7 @@ function reducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
-    case "CREATE_RACE":
+    case "POST_RACE":
       return {
         ...state,
       };

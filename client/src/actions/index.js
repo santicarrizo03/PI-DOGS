@@ -10,49 +10,50 @@ export function getRaces(){
     })
   }
 }
-export function getRaceByName(name) {
-  return async function (dispatch) {
-    try {
-      var namesData = await axios.get(`/dogs?name=${name}`);
-      return dispatch({
-        type: "GET_RACE_BY_NAME",
-        payload: namesData.data,
-      });
-    } catch (error) {
-      alert("The dog you are searching, doesn't exist, try again");
-      return dispatch({ type: "GET_INFO" });
-    }
-  };
+
+export function getRaceByName(name){
+  return async function(dispatch){
+    let json = await axios.get(`http://localhost:3001/dogs?name=${name}` ,{});
+    return dispatch({
+      type: "GET_RACE_BY_NAME",
+      payload: json.data
+
+    })
+  }
 }
 
-export const getRaceById = (id) => (dispatch) => {
-  axios
-    .get(`/dogs/${id}`)
-    .then((r) => {
-      return dispatch({ type: "GET_RACE_BY_ID", payload: r.data });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
 
-export function createRace(payload) {
-  return async function (dispatch) {
-      const response = await axios.post('http://localhost:3001/dogs', payload);
-      console.log(response);
-      return response;
+
+export function getRaceById(id){
+  return async function(dispatch){
+    let json = await axios.get(`http://localhost:3001/dogs/${id}`,{})
+    return dispatch({
+      type: "GET_RACE_BY_ID",
+      payload: json.data
+    })
   }
 }
 
 export function getTemperaments() {
   return async function (dispatch) {
-      let json = await axios.get('http://localhost:3001/temperament', {});
+      const json = await axios.get('http://localhost:3001/temperaments', {});
       return dispatch({
           type: "GET_TEMPERAMENTS",
           payload: json.data,
       })
   }
 }
+
+export const postRace = (race) => (dispatch) => {
+  axios
+    .post("http://localhost:3001/dogs", race)
+    .then((r) => {
+      return dispatch({ type: "POST_RACE", payload: r.data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export const filterByTemperament = (temperament) => (dispatch) => {
   return dispatch({ type: "FILTER_BY_TEMPERAMENT", payload: temperament });

@@ -6,16 +6,16 @@ import {
   getInfo,
   getTemperaments,
   resetRaces,
-} from "../actions/index";
-import Card from "./Card";
-import Navbar from "./Navbar";
+} from "../../actions/index";
+import Card from "../Card/Card";
+import Navbar from "../NavBar/Navbar";
 
 export default function Home() {
   const dispatch = useDispatch();
   const allRaces = useSelector((state) => state.races);
   const races = useSelector((state) => state.showRaces)
   const [currentPage, setCurrentPage] = useState(1);
-  const [dogsPerPage, setDogsPerPage] = useState(8);
+  const [dogsPerPage] = useState(8);
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOdFirstDog = indexOfLastDog - dogsPerPage;
   const actualElements = races.slice(indexOdFirstDog, indexOfLastDog);
@@ -49,7 +49,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="home">
       <Navbar paged={changePage}/>
       <button className="prev-next" onClick={handlePrev}>
         Prev

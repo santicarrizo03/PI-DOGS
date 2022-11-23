@@ -6,8 +6,8 @@ import {
   filterByApiOrDb,
   filterByTemperament,
   resetRaces,
-} from "../actions/index";
-import SearchBar from "./SearchBar";
+} from "../../actions/index";
+import SearchBar from "../SearchBar/SearchBar";
 
 function Navbar({ paged }) {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ function Navbar({ paged }) {
         disabled={!temperaments}
         onChange={handleChangeTemp}
       >
-        <option selected="selected" disabled={true}>
+        <option selected="selected">
           Choose a temperament
         </option>
         {temperaments ? (
